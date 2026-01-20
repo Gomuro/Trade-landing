@@ -7,10 +7,10 @@
     
     <meta property="og:title" content="Damir Trade">
     <meta property="og:description" content="Торговля в реальном времени. Смотри и повторяй.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Damir+Trade">
     <meta property="og:type" content="website">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💹</text></svg>">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,284 +18,209 @@
 
     <style>
         body { 
-            background-color: #050505; 
+            background-color: #020403; /* Глибокий чорно-зелений */
             color: #ffffff; 
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
         
+        /* Соковитий зелений градієнт тексту */
         .text-gradient {
-            background: linear-gradient(90deg, #60a5fa, #34d399);
+            background: linear-gradient(90deg, #34d399, #0ea5e9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
         }
 
+        /* Кнопка з зеленим світінням */
         .btn-glow {
             position: relative;
             z-index: 1;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
         .btn-glow::before {
             content: '';
             position: absolute;
             top: 0; left: -100%;
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: 0.6s;
         }
         .btn-glow:hover::before {
             left: 100%;
         }
         .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px) scale(1.02);
         }
         .btn-glow:active {
             transform: translateY(0);
         }
 
+        /* Преміум картки (Green Glass) */
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
+            background: rgba(6, 78, 59, 0.15); /* Темно-смарагдовий */
+            border: 1px solid rgba(52, 211, 153, 0.1);
+            backdrop-filter: blur(14px);
             transition: all 0.4s ease;
         }
         .glass-card:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(52, 211, 153, 0.4);
+            background: rgba(6, 78, 59, 0.25);
             transform: translateY(-4px);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.2);
         }
 
+        /* Swiper Fixes */
         .swiper {
             width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
+            padding-top: 40px;
+            padding-bottom: 60px;
         }
-
         .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            width: 320px;
+            width: 280px; /* Ширина під скріншот телефону */
             height: auto;
-            opacity: 0.4;
             transition: all 0.3s ease;
-            transform: scale(0.9);
         }
-
-        .swiper-slide-active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 10;
-        }
-
-        .review-card {
-            background: #1c1c1e;
-            border-radius: 24px;
-            padding: 24px;
-            position: relative;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            min-height: 280px;
-        }
-
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .review-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        /* Зображення-плейсхолдери для відгуків */
+        .review-placeholder {
+            width: 100%;
+            aspect-ratio: 9/16; /* Пропорція екрану телефону */
+            background: #0f172a;
+            border-radius: 16px;
+            border: 2px dashed rgba(52, 211, 153, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            color: white;
-            margin-right: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
         }
-        
-        .grad-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-        .grad-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-        .grad-green { background: linear-gradient(135deg, #10b981, #059669); }
-        .grad-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .grad-cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); }
-
-        .review-info h4 {
-            font-weight: 600;
-            color: #f3f4f6;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .review-info span {
-            font-size: 12px;
-            color: #6b7280;
-            display: block;
-            margin-top: 2px;
+        .review-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Щоб було видно, що це заглушка */
         }
 
-        .review-body {
-            color: #d1d5db;
-            font-size: 15px;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .review-footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-            font-size: 12px;
-            color: #52525b;
-            font-weight: 500;
-        }
-
-        .swiper-button-next, .swiper-button-prev {
-            color: white;
-            background: rgba(255,255,255,0.1);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
-        }
-        .swiper-button-next:after, .swiper-button-prev:after {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: #3b82f6;
-            transform: scale(1.1);
-        }
-        
+        /* Навігація слайдера */
         .swiper-pagination-bullet {
             background: #4b5563;
             opacity: 1;
-            width: 8px;
-            height: 8px;
-            transition: all 0.3s;
         }
         .swiper-pagination-bullet-active {
-            background: #3b82f6;
+            background: #10b981; /* Emerald 500 */
             width: 24px;
             border-radius: 4px;
         }
 
-        .verified-icon {
-            width: 14px;
-            height: 14px;
-            fill: #3b82f6;
+        /* Фон - Глибина */
+        .bg-glow-spot {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
-<body class="selection:bg-blue-500 selection:text-white">
+<body class="selection:bg-emerald-500 selection:text-white">
 
-    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 supports-[backdrop-filter]:bg-black/60">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
-            <div class="flex items-center gap-2 select-none">
-                <span class="text-xl font-black tracking-tight uppercase">
-                    <span class="text-blue-500">DAMIR</span> TRADE
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="bg-glow-spot bg-emerald-600 w-[600px] h-[600px] -top-[200px] -left-[100px] opacity-20"></div>
+        <div class="bg-glow-spot bg-teal-600 w-[500px] h-[500px] top-[40%] right-[-100px] opacity-20"></div>
+        <div class="bg-glow-spot bg-green-800 w-[800px] h-[400px] bottom-0 left-[20%] opacity-15"></div>
+    </div>
+
+    <header class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="w-full px-4 md:px-8 h-20 flex justify-between items-center max-w-[1920px] mx-auto">
+            <div class="flex items-center select-none pl-2">
+                <span class="text-xl md:text-2xl font-black tracking-tighter uppercase italic">
+                    <span class="text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">DAMIR</span> TRADE
                 </span>
             </div>
 
-            <div id="spots-container" class="flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-1.5 rounded-full transition-colors duration-500">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            <div id="spots-container" class="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2 rounded-full transition-colors duration-500 backdrop-blur-md">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
                 </span>
-                <span id="spots-text" class="text-red-400 text-xs md:text-sm font-bold uppercase tracking-wider tabular-nums">Осталось 11 мест</span>
+                <span id="spots-text" class="text-gray-200 text-sm font-bold uppercase tracking-wider tabular-nums">Осталось 11 мест</span>
             </div>
         </div>
     </header>
 
-    <main>
-        <section class="pt-32 pb-20 px-4 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/15 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
-
-            <div class="max-w-4xl mx-auto relative z-10">
-                <h1 class="text-4xl md:text-6xl font-black mb-6 leading-[1.1] tracking-tight">
+    <main class="relative z-10">
+        <section class="pt-40 pb-20 px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
                     Дамир Trade — <br> торговля в <span class="text-gradient">реальном времени</span>
                 </h1>
-                <p class="text-gray-400 text-lg md:text-xl mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
+                <p class="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
                     Смотри, как я торгую, и повторяй шаг за шагом. Без лишней теории.
                 </p>
-                <div class="inline-block mb-10">
-                    <p class="text-blue-400/90 text-sm font-semibold uppercase tracking-widest animate-pulse">
-                        👇 Перейди в канал и убедись сам 👇
-                    </p>
-                </div>
-                <div class="block mb-14">
-                    <a href="https://t.me/" target="_blank" class="btn-glow inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-12 rounded-2xl text-lg shadow-xl shadow-blue-900/20 transition-transform hover:scale-[1.02]">
+                
+                <div class="block mb-16">
+                    <a href="https://t.me/YOUR_LINK" target="_blank" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg transition-transform hover:scale-[1.02]">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
                         ПЕРЕЙТИ В КАНАЛ
                     </a>
                 </div>
 
-                <div class="relative max-w-4xl mx-auto group perspective-1000">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-                    <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070" alt="Trading Dashboard" class="relative rounded-2xl border border-white/10 w-full shadow-2xl bg-gray-900 block">
+                <div class="relative max-w-5xl mx-auto group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition duration-1000"></div>
+                    <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop" alt="Trading Dashboard" class="relative rounded-2xl border border-white/10 w-full shadow-2xl bg-[#0a0f0d] block">
                 </div>
             </div>
         </section>
 
-        <section class="py-20 px-4">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tracking-tight">
-                    Что вы получите, <span class="text-blue-500">присоединившись</span>:
+        <section class="py-24 px-4 relative">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold mb-20 text-center tracking-tight">
+                    Что вы получите, <span class="text-emerald-400 drop-shadow-lg">присоединившись</span>:
                 </h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-blue-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-blue-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Торговлю в лайве</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Вы увидите, как проходят сделки — без теории и лишних слов. Рынок, входы, выходы — всё по факту.</p>
                     </div>
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-purple-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-purple-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Обучение для новичков</h3>
+                        <h3 class="text-xl font-bold mb-3 text-white">Бесплатное обучение</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Только самое необходимое. Без многочасовых курсов и сложных терминов — разберётся любой.</p>
                     </div>
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-red-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-red-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Прямые эфиры</h3>
-                        <p class="text-gray-400 leading-relaxed text-sm">Мы выходим в эфир и торгуем вместе. Вы видите процесс вживую и можете повторять действия.</p>
+                        <p class="text-gray-400 leading-relaxed text-sm">Мы выходим в эфир и торгуем вместе. Вы видите процесс вживую и повторяете действия.</p>
                     </div>
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-green-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-green-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Личная поддержка</h3>
-                        <p class="text-gray-400 leading-relaxed text-sm">Если что-то не получается — помогу лично и подскажу, где ошибка. Мы не бросаем своих.</p>
+                        <h3 class="text-xl font-bold mb-3 text-white">Личная помощь</h3>
+                        <p class="text-gray-400 leading-relaxed text-sm">Если что-то не получается — помогу лично и подскажу, где ошибка. Поддержка 24/7.</p>
                     </div>
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-yellow-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-yellow-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Свежая аналитика</h3>
-                        <p class="text-gray-400 leading-relaxed text-sm">Делимся актуальными данными и мыслями по рынку, по которым работает наша команда.</p>
+                        <h3 class="text-xl font-bold mb-3 text-white">Актуальная аналитика</h3>
+                        <p class="text-gray-400 leading-relaxed text-sm">Мы делимся актуальными данными и аналитикой, по которой работает наша команда.</p>
                     </div>
                     <div class="glass-card p-8 rounded-3xl group">
-                        <div class="mb-6 bg-cyan-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-cyan-400 group-hover:scale-110 transition-transform">
+                        <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Удобный формат</h3>
@@ -305,123 +230,67 @@
             </div>
         </section>
 
-        <section class="py-20 px-4 overflow-hidden bg-white/[0.02]">
+        <section class="py-24 px-4 overflow-hidden">
             <div class="max-w-7xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Отзывы участников</h2>
-                <p class="text-gray-400 mb-12 max-w-xl mx-auto">Реальные сообщения от людей, которые уже торгуют вместе с нами.</p>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Отзывы участников</h2>
+                <p class="text-gray-400 mb-16 max-w-xl mx-auto">Реальные сообщения от людей, которые уже торгуют вместе с нами.</p>
                 
                 <div class="swiper reviewsSwiper px-4">
                     <div class="swiper-wrapper">
-                        
                         <div class="swiper-slide">
-                            <div class="review-card">
-                                <div class="review-header">
-                                    <div class="review-avatar grad-blue">AK</div>
-                                    <div class="review-info text-left">
-                                        <h4>Алексей К. <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></h4>
-                                        <span>Участник канала</span>
-                                    </div>
-                                </div>
-                                <div class="review-body text-left">
-                                    Дамир, спасибо за сегодняшний эфир! 🔥 Четко сработали по сигналам. +15% к депозиту за полчаса, я в шоке. Наконец-то нашел канал без воды.
-                                </div>
-                                <div class="review-footer">14:32</div>
+                            <div class="review-placeholder">
+                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+1" alt="Review Placeholder">
                             </div>
                         </div>
-
                         <div class="swiper-slide">
-                            <div class="review-card">
-                                <div class="review-header">
-                                    <div class="review-avatar grad-purple">CM</div>
-                                    <div class="review-info text-left">
-                                        <h4>CryptoMax <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></h4>
-                                        <span>PRO Трейдер</span>
-                                    </div>
-                                </div>
-                                <div class="review-body text-left">
-                                    Сначала сомневался, если честно. Но статистика не врет. Уже неделю торгую с вами в плюсе. Нравится, что есть поддержка и объясняют логику.
-                                </div>
-                                <div class="review-footer">Вчера</div>
+                            <div class="review-placeholder">
+                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+2" alt="Review Placeholder">
                             </div>
                         </div>
-
                         <div class="swiper-slide">
-                            <div class="review-card">
-                                <div class="review-header">
-                                    <div class="review-avatar grad-green">EL</div>
-                                    <div class="review-info text-left">
-                                        <h4>Елена <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></h4>
-                                        <span>Новичок</span>
-                                    </div>
-                                </div>
-                                <div class="review-body text-left">
-                                    Для новичка самое то. Я в трейдинге ноль, но с вашей помощью начала понимать, что к чему. Первые сделки закрыла в плюс, страх ушел. 🙏
-                                </div>
-                                <div class="review-footer">10:15</div>
+                            <div class="review-placeholder">
+                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+3" alt="Review Placeholder">
                             </div>
                         </div>
-
                         <div class="swiper-slide">
-                            <div class="review-card">
-                                <div class="review-header">
-                                    <div class="review-avatar grad-orange">TB</div>
-                                    <div class="review-info text-left">
-                                        <h4>Trader_Bro <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></h4>
-                                        <span>Участник канала</span>
-                                    </div>
-                                </div>
-                                <div class="review-body text-left">
-                                    Вчерашний сигнал по битку просто пушка! 🚀🚀🚀 Залетел на хорошую сумму, профит бешеный. Жду следующий лайв!
-                                </div>
-                                <div class="review-footer">Вчера</div>
+                            <div class="review-placeholder">
+                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+4" alt="Review Placeholder">
                             </div>
                         </div>
-
                         <div class="swiper-slide">
-                            <div class="review-card">
-                                <div class="review-header">
-                                    <div class="review-avatar grad-cyan">DM</div>
-                                    <div class="review-info text-left">
-                                        <h4>Дмитрий <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></h4>
-                                        <span>Участник канала</span>
-                                    </div>
-                                </div>
-                                <div class="review-body text-left">
-                                    Работаю с телефона, все удобно. Сигналы приходят вовремя, успеваю заходить. За месяц увеличил депозит почти в полтора раза.
-                                </div>
-                                <div class="review-footer">09:45</div>
+                            <div class="review-placeholder">
+                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+5" alt="Review Placeholder">
                             </div>
                         </div>
-
                     </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination mt-10"></div>
                 </div>
             </div>
         </section>
 
         <section class="py-24 px-4 text-center">
-            <div class="max-w-4xl mx-auto relative">
-                <div class="absolute inset-0 bg-blue-600 blur-[120px] opacity-20 -z-10 pointer-events-none"></div>
+            <div class="max-w-5xl mx-auto relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/80 to-teal-900/80 rounded-[40px] blur-sm border border-emerald-500/30"></div>
                 
-                <h2 class="text-3xl md:text-5xl font-bold mb-8 tracking-tight">Готов начать прямо сейчас?</h2>
-                <p class="text-gray-300 text-lg mb-10 max-w-xl mx-auto">Перейди в мой Telegram-канал и смотри как всё работает на практике</p>
-                
-                <a href="https://t.me/" target="_blank" class="btn-glow inline-flex items-center justify-center bg-white text-blue-900 font-bold py-5 px-12 rounded-2xl text-lg shadow-2xl hover:bg-gray-50 transition-transform hover:scale-105">
-                    <svg class="w-6 h-6 mr-3" fill="#1e3a8a" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
-                    ПЕРЕЙТИ В КАНАЛ
-                </a>
-                
-                <div class="mt-12 text-white/20 text-xs">
-                    &copy; 2026 Damir Trade. Все права защищены.
+                <div class="relative bg-[#020604]/80 backdrop-blur-xl rounded-[40px] p-12 md:p-20 border border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
+                        Готов начать прямо сейчас?
+                    </h2>
+                    <p class="text-emerald-300 text-lg md:text-2xl font-medium tracking-wide">
+                        Перейди в мой Telegram-канал и смотри как всё работает на практике
+                    </p>
                 </div>
+            </div>
+            
+            <div class="mt-16 text-white/10 text-xs">
+                &copy; 2026 Damir Trade. All rights reserved.
             </div>
         </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // Swiper Settings
         var swiper = new Swiper(".reviewsSwiper", {
             effect: "coverflow",
             grabCursor: true,
@@ -435,10 +304,6 @@
                 slideShadows: false,
             },
             loop: true,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -449,28 +314,20 @@
                 pauseOnMouseEnter: true,
             },
             breakpoints: {
-                320: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 20
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 30
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 40
-                }
+                320: { slidesPerView: 1.3, spaceBetween: 20 },
+                768: { slidesPerView: 2.5, spaceBetween: 30 },
+                1024: { slidesPerView: 3.5, spaceBetween: 40 }
             }
         });
 
+        // "Spots Left" Logic
         document.addEventListener('DOMContentLoaded', function() {
             const spotsElement = document.getElementById('spots-text');
             const spotsContainer = document.getElementById('spots-container');
             const minSpots = 3;
             let currentSpots = 11;
 
-            const savedSpots = localStorage.getItem('damirSpots_v2');
+            const savedSpots = localStorage.getItem('damirSpots_v3'); // v3 for fresh start
             if (savedSpots) {
                 currentSpots = parseInt(savedSpots);
                 if (currentSpots <= minSpots) currentSpots = minSpots;
@@ -487,15 +344,15 @@
 
             function updateDisplay(num) {
                 spotsElement.innerHTML = `ОСТАЛОСЬ ${num} ${getDeclension(num)}`;
-                spotsContainer.classList.add('bg-red-500/30');
-                setTimeout(() => spotsContainer.classList.remove('bg-red-500/30'), 300);
+                spotsContainer.classList.add('bg-emerald-500/20');
+                setTimeout(() => spotsContainer.classList.remove('bg-emerald-500/20'), 300);
             }
 
             function decreaseSpots() {
                 if (currentSpots > minSpots) {
                     currentSpots--;
                     updateDisplay(currentSpots);
-                    localStorage.setItem('damirSpots_v2', currentSpots);
+                    localStorage.setItem('damirSpots_v3', currentSpots);
                     const nextTime = Math.floor(Math.random() * (15000 - 5000 + 1) + 5000);
                     setTimeout(decreaseSpots, nextTime);
                 }
