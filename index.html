@@ -88,24 +88,26 @@
         }
         
         .swiper-slide {
-            width: 300px;
+            width: 260px;
             height: auto;
             transition: all 0.5s ease;
         }
         
         .swiper-slide-active .review-placeholder {
             border-color: #10b981;
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 0 50px rgba(16, 185, 129, 0.3);
             background: linear-gradient(135deg, #065f46 0%, #022c22 100%);
-            transform: scale(1.05);
+            transform: scale(1.1);
+            opacity: 1;
+            z-index: 10;
         }
 
         .review-placeholder {
             width: 100%;
             aspect-ratio: 9/16;
             background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 24px;
+            border: 1px solid rgba(52, 211, 153, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -115,7 +117,8 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
+            opacity: 0.3;
         }
         .review-placeholder svg {
             width: 48px;
@@ -126,29 +129,29 @@
 
         .swiper-button-next, .swiper-button-prev {
             color: #10b981;
-            background: rgba(6, 78, 59, 0.8);
-            width: 50px;
-            height: 50px;
+            background: rgba(6, 78, 59, 0.6);
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(52, 211, 153, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(52, 211, 153, 0.2);
             transition: all 0.3s;
             z-index: 50;
         }
         .swiper-button-next:hover, .swiper-button-prev:hover {
             background: #10b981;
             color: #fff;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
             transform: scale(1.1);
         }
         .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
         }
 
         @media (min-width: 1024px) {
-            .swiper-button-prev { left: 25%; }
-            .swiper-button-next { right: 25%; }
+            .swiper-button-prev { left: 28%; }
+            .swiper-button-next { right: 28%; }
         }
 
         .swiper-pagination-bullet {
@@ -320,30 +323,6 @@
                                 <span>Место для скриншота #6</span>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="review-placeholder">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                <span>Место для скриншота #7</span>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-placeholder">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                <span>Место для скриншота #8</span>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-placeholder">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                <span>Место для скриншота #9</span>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-placeholder">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                <span>Место для скриншота #10</span>
-                            </div>
-                        </div>
                     </div>
                     
                     <div class="swiper-button-prev"></div>
@@ -364,6 +343,13 @@
                     <p class="text-emerald-300 text-lg md:text-2xl font-medium tracking-wide">
                         Перейди в мой Telegram-канал и смотри как всё работает на практике
                     </p>
+                    
+                    <div class="mt-10">
+                        <a href="https://t.me/" target="_blank" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg transition-transform hover:scale-[1.02]">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
+                            ПЕРЕЙТИ В КАНАЛ
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -393,13 +379,13 @@
             centeredSlides: true,
             slidesPerView: "auto",
             loop: true,
-            loopedSlides: 6,
+            loopedSlides: 10,
             speed: 1000,
             coverflowEffect: {
                 rotate: 0,
                 stretch: 0,
-                depth: 150,
-                modifier: 1.5,
+                depth: 500, // Глибина як на референсі
+                modifier: 1,
                 slideShadows: false,
             },
             navigation: {
@@ -411,9 +397,14 @@
                 clickable: true,
             },
             autoplay: {
-                delay: 3500,
+                delay: 4000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
+            },
+            breakpoints: {
+                320: { slidesPerView: 1.5 },
+                768: { slidesPerView: 2.5 },
+                1024: { slidesPerView: 3 }
             }
         });
 
