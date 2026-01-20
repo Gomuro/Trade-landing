@@ -375,7 +375,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Анімація появи при скролі
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -388,14 +387,13 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Налаштування Swiper
         var swiper = new Swiper(".reviewsSwiper", {
             effect: "coverflow",
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: "auto",
             loop: true,
-            loopedSlides: 6, // Запобігає дьорганню
+            loopedSlides: 6,
             speed: 1000,
             coverflowEffect: {
                 rotate: 0,
@@ -419,7 +417,6 @@
             }
         });
 
-        // Лічильник місць
         document.addEventListener('DOMContentLoaded', function() {
             const spotsElement = document.getElementById('spots-text');
             const spotsContainer = document.getElementById('spots-container');
