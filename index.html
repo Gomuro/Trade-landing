@@ -7,7 +7,6 @@
     
     <meta property="og:title" content="Damir Trade">
     <meta property="og:description" content="Торговля в реальном времени. Смотри и повторяй.">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Damir+Trade">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💹</text></svg>">
@@ -18,14 +17,23 @@
 
     <style>
         body { 
-            background-color: #020403; /* Глибокий чорно-зелений */
+            background-color: #020403;
             color: #ffffff; 
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
         
-        /* Соковитий зелений градієнт тексту */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .text-gradient {
             background: linear-gradient(90deg, #34d399, #0ea5e9);
             -webkit-background-clip: text;
@@ -33,7 +41,6 @@
             text-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
         }
 
-        /* Кнопка з зеленим світінням */
         .btn-glow {
             position: relative;
             z-index: 1;
@@ -60,9 +67,8 @@
             transform: translateY(0);
         }
 
-        /* Преміум картки (Green Glass) */
         .glass-card {
-            background: rgba(6, 78, 59, 0.15); /* Темно-смарагдовий */
+            background: rgba(6, 78, 59, 0.15);
             border: 1px solid rgba(52, 211, 153, 0.1);
             backdrop-filter: blur(14px);
             transition: all 0.4s ease;
@@ -74,49 +80,90 @@
             box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.2);
         }
 
-        /* Swiper Fixes */
         .swiper {
             width: 100%;
-            padding-top: 40px;
-            padding-bottom: 60px;
+            padding-top: 60px;
+            padding-bottom: 80px;
+            perspective: 1000px;
         }
+        
         .swiper-slide {
-            width: 280px; /* Ширина під скріншот телефону */
+            width: 300px;
             height: auto;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
-        /* Зображення-плейсхолдери для відгуків */
-        .review-placeholder {
-            width: 100%;
-            aspect-ratio: 9/16; /* Пропорція екрану телефону */
-            background: #0f172a;
-            border-radius: 16px;
-            border: 2px dashed rgba(52, 211, 153, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .review-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5; /* Щоб було видно, що це заглушка */
+        
+        .swiper-slide-active .review-placeholder {
+            border-color: #10b981;
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+            background: linear-gradient(135deg, #065f46 0%, #022c22 100%);
+            transform: scale(1.05);
         }
 
-        /* Навігація слайдера */
+        .review-placeholder {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #34d399;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        .review-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: #10b981;
+            background: rgba(6, 78, 59, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: all 0.3s;
+            z-index: 50;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #10b981;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            transform: scale(1.1);
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        @media (min-width: 1024px) {
+            .swiper-button-prev { left: 25%; }
+            .swiper-button-next { right: 25%; }
+        }
+
         .swiper-pagination-bullet {
             background: #4b5563;
             opacity: 1;
+            width: 8px; height: 8px;
+            transition: all 0.3s ease;
         }
         .swiper-pagination-bullet-active {
-            background: #10b981; /* Emerald 500 */
-            width: 24px;
-            border-radius: 4px;
+            background: #10b981;
+            width: 32px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
         }
 
-        /* Фон - Глибина */
         .bg-glow-spot {
             position: absolute;
             border-radius: 50%;
@@ -156,21 +203,21 @@
     <main class="relative z-10">
         <section class="pt-40 pb-20 px-4 text-center">
             <div class="max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
+                <h1 class="reveal text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
                     Дамир Trade — <br> торговля в <span class="text-gradient">реальном времени</span>
                 </h1>
-                <p class="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                <p class="reveal text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed font-medium" style="transition-delay: 100ms;">
                     Смотри, как я торгую, и повторяй шаг за шагом. Без лишней теории.
                 </p>
                 
-                <div class="block mb-16">
-                    <a href="https://t.me/YOUR_LINK" target="_blank" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg transition-transform hover:scale-[1.02]">
+                <div class="reveal block mb-16" style="transition-delay: 200ms;">
+                    <a href="https://t.me/" target="_blank" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg transition-transform hover:scale-[1.02]">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
                         ПЕРЕЙТИ В КАНАЛ
                     </a>
                 </div>
 
-                <div class="relative max-w-5xl mx-auto group">
+                <div class="reveal relative max-w-5xl mx-auto group" style="transition-delay: 300ms;">
                     <div class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition duration-1000"></div>
                     <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop" alt="Trading Dashboard" class="relative rounded-2xl border border-white/10 w-full shadow-2xl bg-[#0a0f0d] block">
                 </div>
@@ -179,47 +226,47 @@
 
         <section class="py-24 px-4 relative">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl md:text-5xl font-bold mb-20 text-center tracking-tight">
+                <h2 class="reveal text-3xl md:text-5xl font-bold mb-20 text-center tracking-tight">
                     Что вы получите, <span class="text-emerald-400 drop-shadow-lg">присоединившись</span>:
                 </h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 0ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Торговлю в лайве</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Вы увидите, как проходят сделки — без теории и лишних слов. Рынок, входы, выходы — всё по факту.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 100ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Бесплатное обучение</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Только самое необходимое. Без многочасовых курсов и сложных терминов — разберётся любой.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 200ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Прямые эфиры</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Мы выходим в эфир и торгуем вместе. Вы видите процесс вживую и повторяете действия.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 0ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Личная помощь</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Если что-то не получается — помогу лично и подскажу, где ошибка. Поддержка 24/7.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 100ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Актуальная аналитика</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Мы делимся актуальными данными и аналитикой, по которой работает наша команда.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl group">
+                    <div class="reveal glass-card p-8 rounded-3xl group" style="transition-delay: 200ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                         </div>
@@ -232,44 +279,82 @@
 
         <section class="py-24 px-4 overflow-hidden">
             <div class="max-w-7xl mx-auto text-center">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Отзывы участников</h2>
-                <p class="text-gray-400 mb-16 max-w-xl mx-auto">Реальные сообщения от людей, которые уже торгуют вместе с нами.</p>
+                <h2 class="reveal text-3xl md:text-5xl font-bold mb-4 tracking-tight">Отзывы участников</h2>
+                <p class="reveal text-gray-400 mb-16 max-w-xl mx-auto">Реальные сообщения от людей, которые уже торгуют вместе с нами.</p>
                 
-                <div class="swiper reviewsSwiper px-4">
+                <div class="reveal swiper reviewsSwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="review-placeholder">
-                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+1" alt="Review Placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #1</span>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="review-placeholder">
-                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+2" alt="Review Placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #2</span>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="review-placeholder">
-                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+3" alt="Review Placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #3</span>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="review-placeholder">
-                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+4" alt="Review Placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #4</span>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="review-placeholder">
-                                <img src="https://via.placeholder.com/280x500/111827/10b981?text=SCREENSHOT+5" alt="Review Placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #5</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #6</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #7</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #8</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #9</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-placeholder">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>Место для скриншота #10</span>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                     <div class="swiper-pagination mt-10"></div>
                 </div>
             </div>
         </section>
 
         <section class="py-24 px-4 text-center">
-            <div class="max-w-5xl mx-auto relative group">
+            <div class="reveal max-w-5xl mx-auto relative group">
                 <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/80 to-teal-900/80 rounded-[40px] blur-sm border border-emerald-500/30"></div>
                 
                 <div class="relative bg-[#020604]/80 backdrop-blur-xl rounded-[40px] p-12 md:p-20 border border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
@@ -290,44 +375,58 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Swiper Settings
+        // Анімація появи при скролі
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Налаштування Swiper
         var swiper = new Swiper(".reviewsSwiper", {
             effect: "coverflow",
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: "auto",
+            loop: true,
+            loopedSlides: 6, // Запобігає дьорганню
+            speed: 1000,
             coverflowEffect: {
                 rotate: 0,
                 stretch: 0,
-                depth: 100,
-                modifier: 1,
+                depth: 150,
+                modifier: 1.5,
                 slideShadows: false,
             },
-            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
             },
             autoplay: {
-                delay: 4000,
+                delay: 3500,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
-            },
-            breakpoints: {
-                320: { slidesPerView: 1.3, spaceBetween: 20 },
-                768: { slidesPerView: 2.5, spaceBetween: 30 },
-                1024: { slidesPerView: 3.5, spaceBetween: 40 }
             }
         });
 
-        // "Spots Left" Logic
+        // Лічильник місць
         document.addEventListener('DOMContentLoaded', function() {
             const spotsElement = document.getElementById('spots-text');
             const spotsContainer = document.getElementById('spots-container');
             const minSpots = 3;
             let currentSpots = 11;
 
-            const savedSpots = localStorage.getItem('damirSpots_v3'); // v3 for fresh start
+            const savedSpots = localStorage.getItem('damirSpots_v4');
             if (savedSpots) {
                 currentSpots = parseInt(savedSpots);
                 if (currentSpots <= minSpots) currentSpots = minSpots;
@@ -352,7 +451,7 @@
                 if (currentSpots > minSpots) {
                     currentSpots--;
                     updateDisplay(currentSpots);
-                    localStorage.setItem('damirSpots_v3', currentSpots);
+                    localStorage.setItem('damirSpots_v4', currentSpots);
                     const nextTime = Math.floor(Math.random() * (15000 - 5000 + 1) + 5000);
                     setTimeout(decreaseSpots, nextTime);
                 }
