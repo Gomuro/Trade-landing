@@ -106,30 +106,31 @@
 
         .swiper {
             width: 100%;
-            padding-top: 20px;
-            padding-bottom: 70px;
+            padding-top: 40px;
+            padding-bottom: 80px;
+            perspective: 1200px;
         }
 
         .swiper-slide {
-            width: 400px;
+            width: 300px;
             height: auto;
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
         
         .review-card {
             width: 100%;
-            height: 500px;
+            height: 540px;
             background: linear-gradient(180deg, rgba(6, 78, 59, 0.2) 0%, #020f0c 100%);
             border-radius: 24px;
             border: 1px solid rgba(52, 211, 153, 0.15);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 0;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.5;
-            transform: scale(0.9);
+            transition: all 0.5s ease;
+            opacity: 0.4;
+            transform: scale(0.85);
             overflow: hidden;
         }
 
@@ -143,18 +144,12 @@
         .swiper-slide-active .review-card {
             border-color: var(--color-primary);
             background: linear-gradient(180deg, rgba(6, 95, 70, 0.5) 0%, #020f0c 100%);
-            box-shadow: 0 0 50px rgba(16, 185, 129, 0.3), 0 30px 60px rgba(0,0,0,0.8);
+            box-shadow: 0 0 60px rgba(16, 185, 129, 0.25), 0 30px 60px rgba(0,0,0,0.9);
             opacity: 1;
             transform: scale(1);
             z-index: 20;
         }
         
-        .swiper-slide-prev .review-card,
-        .swiper-slide-next .review-card {
-            opacity: 0.7;
-            transform: scale(0.95);
-        }
-
         .swiper-nav-btn {
             position: absolute;
             top: 50%;
@@ -162,7 +157,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: rgba(6, 78, 59, 0.9);
+            background: rgba(6, 78, 59, 0.8);
             border: 1px solid rgba(52, 211, 153, 0.4);
             color: var(--color-primary);
             display: flex;
@@ -180,11 +175,6 @@
             color: white;
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
-            border-color: var(--color-primary-light);
-        }
-        
-        .swiper-nav-btn:active {
-            transform: translateY(-50%) scale(1.02);
         }
         
         .swiper-nav-btn svg {
@@ -192,20 +182,12 @@
             height: 26px;
         }
 
-        .nav-prev { left: 5%; }
-        .nav-next { right: 5%; }
+        .nav-prev { left: 15%; }
+        .nav-next { right: 15%; }
 
-        @media (min-width: 768px) {
-            .nav-prev { left: 8%; }
-            .nav-next { right: 8%; }
-        }
-        @media (min-width: 1024px) {
-            .nav-prev { left: 12%; }
-            .nav-next { right: 12%; }
-        }
-        @media (min-width: 1280px) {
-            .nav-prev { left: 18%; }
-            .nav-next { right: 18%; }
+        @media (max-width: 1024px) {
+            .nav-prev { left: 5%; }
+            .nav-next { right: 5%; }
         }
 
         .swiper-pagination {
@@ -219,7 +201,7 @@
             width: 10px;
             height: 10px;
             margin: 0 6px !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
         .swiper-pagination-bullet-active {
             background: var(--color-primary);
@@ -236,7 +218,6 @@
             pointer-events: none;
             z-index: -1;
             animation: glow-pulse 8s ease-in-out infinite;
-            will-change: opacity, transform;
         }
         
         @keyframes glow-pulse {
@@ -255,17 +236,14 @@
 
         @media (max-width: 640px) {
             .swiper-slide {
-                width: 280px !important;
+                width: 260px;
             }
             .review-card {
-                height: 400px;
+                height: 460px;
             }
             .swiper-nav-btn {
-                width: 48px;
-                height: 48px;
+                display: none;
             }
-            .nav-prev { left: 2%; }
-            .nav-next { right: 2%; }
         }
     </style>
 </head>
@@ -276,7 +254,7 @@
         <div class="bg-glow-spot bg-teal-600 w-[400px] h-[400px] top-[40%] right-[-80px]"></div>
     </div>
 
-    <header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/5">
+    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="w-full px-4 md:px-8 h-20 flex justify-between items-center max-w-[1920px] mx-auto">
             <div class="flex items-center select-none pl-2">
                 <span class="text-xl md:text-2xl font-black tracking-tighter uppercase">
@@ -305,15 +283,15 @@
                 </p>
                 
                 <div class="reveal block mb-16" style="transition-delay: 200ms;">
-                    <a href="https://t.me/your_channel" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram канал" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg">
-                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
+                    <a href="https://t.me/your_channel" target="_blank" rel="noopener noreferrer" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
                         ПЕРЕЙТИ В КАНАЛ
                     </a>
                 </div>
 
                 <div class="reveal hero-image-wrapper relative max-w-5xl mx-auto" style="transition-delay: 300ms;">
                     <div class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-2xl blur-xl opacity-40 transition-opacity duration-700 group-hover:opacity-60"></div>
-                    <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop" alt="Торговый терминал с графиками и аналитикой" class="relative rounded-2xl border border-white/10 w-full shadow-2xl bg-[#0a0f0d] block" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop" class="relative rounded-2xl border border-white/10 w-full shadow-2xl bg-[#0a0f0d] block" loading="lazy">
                 </div>
             </div>
         </section>
@@ -327,42 +305,42 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 0ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Торговлю в лайве</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Вы увидите, как проходят сделки — без теории и лишних слов. Рынок, входы, выходы — всё по факту.</p>
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 100ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Бесплатное обучение</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Только самое необходимое. Без многочасовых курсов и сложных терминов — разберётся любой.</p>
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 200ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Прямые эфиры</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Мы выходим в эфир и торгуем вместе. Вы видите процесс вживую и повторяете действия.</p>
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 0ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Личная помощь</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Если что-то не получается — помогу лично и подскажу, где ошибка. Поддержка 24/7.</p>
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 100ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Актуальная аналитика</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Мы делимся актуальными данными и аналитикой, по которой работает наша команда.</p>
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 200ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Удобный формат</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Работать можно с телефона. Без сложных платформ, терминалов и лишних действий.</p>
@@ -380,10 +358,10 @@
             <div class="slider-section-container reveal">
                 
                 <button class="swiper-nav-btn nav-prev" aria-label="Предыдущий отзыв">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 <button class="swiper-nav-btn nav-next" aria-label="Следующий отзыв">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" /></svg>
                 </button>
 
                 <div class="swiper reviewsSwiper">
@@ -395,7 +373,37 @@
                         </div>
                         <div class="swiper-slide">
                             <div class="review-card">
-                                <img src="data:image/png;base64,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" alt="Trading screenshot 2">
+                                <img src="https://images.unsplash.com/photo-1642790551116-18e150f248e5?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 2">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 3">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 4">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 5">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 6">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 1">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <img src="https://images.unsplash.com/photo-1642790551116-18e150f248e5?q=80&w=800&auto=format&fit=crop" alt="Trading screenshot 2">
                             </div>
                         </div>
                         <div class="swiper-slide">
@@ -437,8 +445,8 @@
                     </p>
                     
                     <div>
-                        <a href="https://t.me/your_channel" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram канал" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg">
-                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
+                        <a href="https://t.me/your_channel" target="_blank" rel="noopener noreferrer" class="btn-glow inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 px-12 rounded-2xl text-lg">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.306-.346-.135l-6.4 4.02-2.76-.84c-.6-.187-.612-.6.125-.89l10.78-4.15c.5-.185.9.111.75.84z"/></svg>
                             ПЕРЕЙТИ В КАНАЛ
                         </a>
                     </div>
@@ -470,8 +478,8 @@
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: "auto",
-            initialSlide: 0,
             loop: true,
+            loopedSlides: 6,
             speed: 600,
             coverflowEffect: {
                 rotate: 0,
