@@ -112,14 +112,15 @@
         }
 
         .swiper-slide {
-            width: 300px;
+            width: 320px;
             height: auto;
             transition: transform 0.5s ease, opacity 0.5s ease;
+            padding: 20px 0;
         }
         
         .review-card {
             width: 100%;
-            height: 540px;
+            height: auto;
             background: linear-gradient(180deg, rgba(6, 78, 59, 0.2) 0%, #020f0c 100%);
             border-radius: 24px;
             border: 1px solid rgba(52, 211, 153, 0.15);
@@ -136,8 +137,7 @@
 
         .review-card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
         }
 
@@ -236,10 +236,7 @@
 
         @media (max-width: 640px) {
             .swiper-slide {
-                width: 260px;
-            }
-            .review-card {
-                height: 460px;
+                width: 280px;
             }
             .swiper-nav-btn {
                 display: none;
@@ -333,7 +330,7 @@
                     </div>
                     <div class="reveal glass-card p-8 rounded-3xl" style="transition-delay: 100ms;">
                         <div class="mb-6 bg-emerald-500/10 w-16 h-16 flex items-center justify-center rounded-2xl text-emerald-400 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white">Актуальная аналитика</h3>
                         <p class="text-gray-400 leading-relaxed text-sm">Мы делимся актуальными данными и аналитикой, по которой работает наша команда.</p>
